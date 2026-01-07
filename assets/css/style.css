@@ -1,0 +1,385 @@
+/* 
+ * AfriPayHub - Premium Fintech Theme 
+ * Modern, Secure, Trustworthy
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap');
+
+:root {
+    /* Brand Colors */
+    --color-primary: #183884;
+    /* Deep Blue - Trust */
+    --color-primary-light: #2a50a8;
+    --color-accent: #d9710e;
+    /* Orange - Action */
+    --color-accent-hover: #b85d0b;
+    --color-secondary: #d9710e;
+    /* Unified with accent for dual-tone look */
+
+    /* Functional Colors */
+    --color-text-main: #183884;
+    --color-text-muted: #53627d;
+    --color-bg-light: #f4f6fb;
+    --color-bg-white: #FFFFFF;
+    --color-border: #dae1ee;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, #183884 0%, #0e2459 100%);
+    --gradient-accent: linear-gradient(135deg, #d9710e 0%, #f0923e 100%);
+    --gradient-cta: linear-gradient(135deg, #0e2459 0%, #183884 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(24, 56, 132, 0.1);
+    --shadow-md: 0 4px 12px rgba(24, 56, 132, 0.15);
+    --shadow-lg: 0 15px 35px rgba(24, 56, 132, 0.2);
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-card-hover: 0 20px 40px -10px rgba(24, 56, 132, 0.25);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-main);
+    background-color: var(--color-bg-white);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: -0.02em;
+}
+
+/* --- Utilities --- */
+.text-primary-dark {
+    color: var(--color-primary);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.bg-light-soft {
+    background-color: var(--color-bg-light);
+}
+
+/* --- Navbar (Glassmorphismish) --- */
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--color-primary) !important;
+    letter-spacing: -0.5px;
+}
+
+.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: var(--color-text-main) !important;
+    margin-right: 0.8rem;
+    font-size: 0.9rem;
+    /* Reduced size to fit one line */
+    transition: color 0.2s;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+}
+
+.nav-link:hover {
+    color: var(--color-secondary) !important;
+}
+
+.nav-link.active {
+    color: var(--color-secondary) !important;
+}
+
+/* --- Buttons --- */
+.btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 50px;
+    /* Pill shape */
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--color-secondary);
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(99, 91, 255, 0.39);
+}
+
+.btn-primary:hover {
+    background: #534be0;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(99, 91, 255, 0.23);
+}
+
+.btn-accent {
+    background: var(--color-accent);
+    color: #ffffff;
+    box-shadow: 0 4px 14px 0 rgba(0, 209, 136, 0.39);
+}
+
+.btn-accent:hover {
+    background: var(--color-accent-hover);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.btn-outline-secondary {
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    background: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* --- Hero Section --- */
+.hero {
+    padding: 8rem 0 5rem;
+    background: var(--color-bg-light);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Abstract background shape */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(99, 91, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: 0;
+    border-radius: 50%;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero .lead {
+    color: var(--color-text-muted);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hero-img-container img {
+    max-height: 400px;
+    /* Reduced height */
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+/* --- Cards --- */
+.card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: transparent;
+}
+
+.feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: rgba(99, 91, 255, 0.1);
+    color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Logos / Partners --- */
+.partners {
+    background: white;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.partners img {
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.3s;
+}
+
+.partners img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+/* --- Pricing --- */
+.price-card.featured {
+    border: 2px solid var(--color-secondary);
+    background: #F4F8FF;
+}
+
+/* --- CTA Section (Distinct from Footer) --- */
+.cta-section {
+    background: var(--gradient-cta);
+    border-radius: 20px;
+    margin-bottom: 4rem;
+    padding: 5rem 2rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+.cta-section .btn-accent {
+    background: white;
+    color: var(--color-primary);
+    box-shadow: none;
+}
+
+.cta-section .btn-accent:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+/* --- Footer --- */
+footer {
+    background: var(--color-primary);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 4rem 0 2rem;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+footer h5 {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+footer ul li {
+    margin-bottom: 0.75rem;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+footer a:hover {
+    color: white;
+}
+
+/* --- Specific Page Headers --- */
+.header-bg {
+    background-size: cover;
+    background-position: center;
+    color: white !important;
+    position: relative;
+}
+
+.header-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(24, 56, 132, 0.85);
+    /* Overlay */
+    z-index: 1;
+}
+
+.header-bg .container {
+    position: relative;
+    z-index: 2;
+}
+
+.header-bg h1,
+.header-bg .lead,
+.header-bg .text-muted {
+    color: white !important;
+}
+
+.header-features {
+    background-image: url('../img/features_header_bg.png');
+}
+
+.header-solutions {
+    background-image: url('../img/header_bg_solutions.png');
+}
+
+.header-developers {
+    background-image: url('../img/header_bg_developers.png');
+}
+
+.header-pricing {
+    background-image: url('../img/header_bg_pricing.png');
+}
+
+.header-contact {
+    background-image: url('../img/header_bg_contact.png');
+}
+
+/* Wait for gen */
+.header-security {
+    background-image: url('../img/header_bg_developers.png');
+}
+
+/* Reuse dev or similar */
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background: white;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        margin-top: 1rem;
+    }
+
+    .nav-link {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .cta-section {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}

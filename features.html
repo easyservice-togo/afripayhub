@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fonctionnalités – AfriPayHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <!-- <i class="bi bi-wallet2 me-2 text-accent"></i>
+                AfriPayHub -->
+                <div>
+                    <img src="assets/img/logo.png" alt="AfriPayHub Logo" style="height: 40px;">
+                </div>
+                AfriPayHub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="features.html">Fonctionnalités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="developers.html">Développeurs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            🇫🇷 FR
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item fw-bold" href="#">🇫🇷 Français</a></li>
+                            <li><a class="dropdown-item" href="index_en.html">🇬🇧 English</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="https://portail.afripayhub.com/login" target="_blank" class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
+                        <a href="https://portail.afripayhub.com/register" target="_blank" class="btn btn-primary btn-sm">Ouvrir un compte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header-bg header-features py-5 mt-5">
+        <div class="container text-center py-5">
+            <h1 class="fw-bold display-5">Une suite complète pour vos paiements</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;">
+                De l'encaissement en ligne à la gestion financière, découvrez tout ce que AfriPayHub peut faire pour vous.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-5">
+        <div class="container">
+            
+            <!-- Feature Block 1 -->
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6 order-lg-2">
+                     <div class="p-5 bg-white shadow-sm rounded-4 border">
+                         <i class="bi bi-credit-card-2-front text-primary display-1 mb-3"></i>
+                         <!-- Ideally a screenshot here -->
+                     </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="pe-lg-5">
+                        <div class="feature-icon bg-light text-primary mb-3">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <h2 class="fw-bold mb-3">Encaissement universel</h2>
+                        <p class="text-muted mb-4">
+                            Ne perdez plus aucune vente. Proposez à vos clients de payer avec leur moyen préféré, qu'ils soient locaux ou internationaux.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Mobile Money (Orange, MTN, Moov...)</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Cartes Visa & Mastercard</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Portefeuilles électroniques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Block 2 -->
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6">
+                     <div class="p-5 bg-primary text-white shadow-sm rounded-4 border">
+                         <i class="bi bi-code-square display-1 mb-3 opacity-50"></i>
+                         <!-- Ideally a screenshot here -->
+                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ps-lg-5">
+                        <div class="feature-icon bg-light text-accent mb-3">
+                            <i class="bi bi-braces"></i>
+                        </div>
+                        <h2 class="fw-bold mb-3">API pour développeurs</h2>
+                        <p class="text-muted mb-4">
+                            Intégracez AfriPayHub en quelques lignes de code. Nos SDKs et notre documentation détaillée vous permettent de démarrer rapidement.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> API RESTful moderne</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Webhooks en temps réel</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Environnement Sandbox gratuit</li>
+                        </ul>
+                        <a href="developers.html" class="btn btn-outline-secondary mt-2">Voir la documentation</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Block 3 -->
+            <div class="row align-items-center" id="recurring">
+                <div class="col-lg-6 order-lg-2">
+                     <div class="p-5 bg-white shadow-sm rounded-4 border">
+                         <i class="bi bi-arrow-repeat text-secondary display-1 mb-3"></i>
+                     </div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="pe-lg-5">
+                        <div class="feature-icon bg-light text-secondary mb-3">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h2 class="fw-bold mb-3">Paiements récurrents & Abonnements</h2>
+                        <p class="text-muted mb-4">
+                            Automatisez votre facturation. Créez des plans d'abonnement et laissez AfriPayHub gérer les prélèvements automatiques.
+                        </p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Gestion des cycles de facturation</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Relance automatique en cas d'échec</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-accent me-2"></i> Dashboard de suivi du Churn</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5 bg-light-soft">
+        <div class="container" data-aos="fade-up">
+            <div class="text-center mb-5">
+                <h3 class="fw-bold">Questions Fréquentes</h3>
+                <p class="text-muted">Tout ce que vous devez savoir pour démarrer</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion" id="accordionFAQ">
+                        <div class="accordion-item border-0 shadow-sm mb-3 rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    Combien de temps faut-il pour intégrer l'API ?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body text-muted">
+                                    Avec notre documentation détaillée et nos SDKs, la plupart des développeurs intègrent un paiement fonctionnel en moins de 30 minutes.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border-0 shadow-sm mb-3 rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    Quels sont les frais de transaction ?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body text-muted">
+                                    Nos frais sont transparents : 2.5% pour les paiements locaux et 3.5% pour les paiements internationaux. Aucun frais caché ni abonnement mensuel.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item border-0 shadow-sm mb-3 rounded-3 overflow-hidden">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    Est-ce sécurisé ?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
+                                <div class="accordion-body text-muted">
+                                    Absolument. Nous sommes certifiés PCI-DSS Niveau 1, la norme de sécurité la plus stricte de l'industrie des paiements.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="container" data-aos="fade-up">
+        <div class="cta-section">
+            <h2 class="fw-bold mb-3">Prêt à transformer vos paiements ?</h2>
+            <p class="lead mb-4 opacity-75">Rejoignez la plateforme la plus fiable d'Afrique.</p>
+            <a href="register.html" class="btn btn-accent btn-lg">Créer un compte gratuitement</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <a class="navbar-brand text-white fw-bold fs-4 d-block mb-3" href="#">AfriPayHub</a>
+                    <p class="text-white-50">
+                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à l'international.
+                    </p>
+                    <div class="d-flex gap-3 social-links">
+                        <a href="#"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#"><i class="bi bi-twitter-x fs-5"></i></a>
+                        <a href="#"><i class="bi bi-linkedin fs-5"></i></a>
+                        <a href="#"><i class="bi bi-instagram fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5>Produit</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="features.html">Fonctionnalités</a></li>
+                        <li><a href="pricing.html">Tarifs</a></li>
+                        <li><a href="security.html">Sécurité</a></li>
+                        <li><a href="#">Mises à jour</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <h5>Développeurs</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="developers.html">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">SDKs</a></li>
+                        <li><a href="#">Statut API</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-envelope me-2"></i> support@afripayhub.com</li>
+                        <li><i class="bi bi-telephone me-2"></i> (+228) 98 38 41 41 / 93 89 92 54 </li>
+                        <li><i class="bi bi-geo-alt me-2"></i> Lomé-TOGO
+Qte Adewui, Bvd de la Kara</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-5 pt-4 text-center text-white-50">
+                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank" class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        once: true
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion – AfriPayHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .split-screen {
+            min-height: 100vh;
+            display: flex;
+        }
+        .left-pane {
+            flex: 1;
+            background: var(--color-primary);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .right-pane {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: white;
+        }
+        .auth-form {
+            width: 100%;
+            max-width: 400px;
+        }
+        @media (max-width: 992px) {
+            .left-pane {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="split-screen">
+        <!-- Left Pane -->
+        <div class="left-pane">
+            <div class="position-relative z-1">
+                <h1 class="display-4 fw-bold mb-4">Bienvenue sur AfriPayHub</h1>
+                <p class="lead opacity-75 mb-5">
+                    Gérez vos transactions, suivez vos ventes et développez votre activité depuis un seul endroit.
+                </p>
+                <div class="d-flex align-items-center gap-3 opacity-75">
+                    <i class="bi bi-shield-check fs-2"></i>
+                    <span>Sécurité PCI-DSS de niveau bancaire</span>
+                </div>
+            </div>
+            <!-- Decorative circle -->
+            <div class="position-absolute bottom-0 end-0 translate-middle-x mb-n5 opacity-10" style="width: 400px; height: 400px; background: white; border-radius: 50%; filter: blur(50px);"></div>
+        </div>
+
+        <!-- Right Pane -->
+        <div class="right-pane">
+            <div class="auth-form">
+                <a href="index.html" class="nb-4 d-inline-block text-decoration-none text-primary fw-bold mb-4">
+                    <i class="bi bi-arrow-left me-2"></i> Retour à l'accueil
+                </a>
+                <h2 class="fw-bold mb-4">Connexion</h2>
+                
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Adresse Email</label>
+                        <input type="email" class="form-control form-control-lg" placeholder="nom@exemple.com">
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label">Mot de passe</label>
+                            <a href="#" class="text-decoration-none small">Mot de passe oublié ?</a>
+                        </div>
+                        <input type="password" class="form-control form-control-lg" placeholder="••••••••">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100 btn-lg mb-4">Se connecter</button>
+
+                    <div class="position-relative text-center mb-4">
+                        <hr>
+                        <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted small">Ou continuer avec</span>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex">
+                        <button class="btn btn-outline-secondary w-100"><i class="bi bi-google me-2"></i>Google</button>
+                        <button class="btn btn-outline-secondary w-100"><i class="bi bi-linkedin me-2"></i>LinkedIn</button>
+                    </div>
+
+                    <p class="text-center mt-4 mb-0 text-muted">
+                        Pas encore de compte ? <a href="register.html" class="fw-bold text-primary text-decoration-none">Inscrivez-vous</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

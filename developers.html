@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Développeurs – AfriPayHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- PrismJS for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div>
+                    <img src="assets/img/logo.png" alt="AfriPayHub Logo" style="height: 40px;">
+                </div>
+                AfriPayHub <span class="badge bg-light text-primary ms-2 fs-7 align-middle">DEV</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="features.html">Fonctionnalités</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="developers.html">API & Docs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            🇫🇷 FR
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                            <li><a class="dropdown-item fw-bold" href="#">🇫🇷 Français</a></li>
+                            <li><a class="dropdown-item" href="index_en.html">🇬🇧 English</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="sandbox.html" class="btn btn-outline-secondary btn-sm me-2">Sandbox</a>
+                        <a href="register.html" class="btn btn-primary btn-sm">Obtenir Clé API</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-5 pt-3">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse position-fixed h-100 overflow-auto pt-5" style="z-index: 100;">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active fw-bold" href="#">
+                                <i class="bi bi-house-door me-2"></i> Introduction
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" href="#">
+                                <i class="bi bi-key me-2"></i> Authentification
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" href="#">
+                                <i class="bi bi-credit-card me-2"></i> Initialiser un paiement
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" href="#">
+                                <i class="bi bi-arrow-repeat me-2"></i> Webhooks
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link text-muted" href="#">
+                                <i class="bi bi-bug me-2"></i> Codes d'erreur
+                            </a>
+                        </li>
+                         <li class="nav-item mt-3">
+                            <a class="nav-link text-warning fw-bold" href="sandbox.html">
+                                <i class="bi bi-joystick me-2"></i> Sandbox
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>SDKs</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a class="nav-link text-muted" href="#">PHP / Laravel</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted" href="#">Node.js</a></li>
+                        <li class="nav-item"><a class="nav-link text-muted" href="#">Python</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-5">
+                <div class="header-bg header-developers rounded-4 p-5 mb-5 text-center">
+                     <h1 class="display-5 fw-bold text-white">Introduction à l'API AfriPayHub</h1>
+                     <p class="lead text-white-50">Exploitez la puissance de notre infrastructure de paiement.</p>
+                </div>
+
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2 class="h2 fw-bold">Vue d'ensemble</h2>
+                </div>
+
+                <p class="lead">
+                    AfriPayHub fournit une API RESTful puissante et facile à utiliser pour accepter des paiements sur vos sites web et applications mobiles.
+                </p>
+
+                <div class="alert alert-info border-2" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i>
+                    <strong>Base URL:</strong> <code>https://api.AfriPayHub.com/v1</code>
+                </div>
+
+                <h3 class="mt-5 fw-bold">Initialiser un paiement</h3>
+                <p>Pour démarrer une transaction, envoyez une requête POST à l'endpoint <code>/transactions/initialize</code>.</p>
+
+                <ul class="nav nav-tabs mt-4" id="codeTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="curl-tab" data-bs-toggle="tab" data-bs-target="#curl" type="button" role="tab">cURL</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="php-tab" data-bs-toggle="tab" data-bs-target="#php" type="button" role="tab">PHP</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="node-tab" data-bs-toggle="tab" data-bs-target="#node" type="button" role="tab">Node.js</button>
+                    </li>
+                </ul>
+
+                <div class="tab-content border border-top-0 rounded-bottom p-0" id="codeTabsContent">
+                    <!-- cURL -->
+                    <div class="tab-pane fade show active" id="curl" role="tabpanel">
+<pre class="rounded-0 m-0"><code class="language-bash">curl https://api.AfriPayHub.com/v1/transactions/initialize \
+  -H "Authorization: Bearer YOUR_SECRET_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": 5000,
+    "currency": "XOF",
+    "email": "customer@email.com",
+    "payment_method": "mobile_money"
+  }'</code></pre>
+                    </div>
+
+                    <!-- PHP -->
+                    <div class="tab-pane fade" id="php" role="tabpanel">
+<pre class="rounded-0 m-0"><code class="language-php">&lt;?php
+$url = "https://api.AfriPayHub.com/v1/transactions/initialize";
+$fields = [
+  'amount' => 5000,
+  'currency' => 'XOF',
+  'email' => 'customer@email.com'
+];
+// ... utilisez cURL ou Guzzle pour envoyer la requête
+?&gt;</code></pre>
+                    </div>
+                     <!-- Node -->
+                    <div class="tab-pane fade" id="node" role="tabpanel">
+<pre class="rounded-0 m-0"><code class="language-javascript">const axios = require('axios');
+
+axios.post('https://api.AfriPayHub.com/v1/transactions/initialize', {
+    amount: 5000,
+    currency: 'XOF',
+    email: 'customer@email.com'
+  }, {
+    headers: { 'Authorization': 'Bearer YOUR_SECRET_KEY' }
+  })
+  .then(response => console.log(response.data))
+  .catch(error => console.error(error));</code></pre>
+                    </div>
+                </div>
+
+                <h3 class="mt-5 fw-bold">Testez gratuitement</h3>
+                <p>Créez un compte Sandbox pour simuler des paiements mobile money et cartes sans débiter d'argent réel.</p>
+                <a href="sandbox.html" class="btn btn-primary">Ouvrir la Console Sandbox</a>
+
+              
+
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markup-templating.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+</body>
+</html>
