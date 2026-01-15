@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,75 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .custom-table {
+            border-collapse: separate;
+            border-spacing: 0;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .custom-table thead th {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            background-color: var(--color-accent);
+            color: #ffffff;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            padding: 1.25rem;
+            border-bottom: 2px solid var(--color-border);
+            border-right: 1px solid var(--color-border);
+        }
+
+        .custom-table thead th:last-child {
+            border-right: none;
+        }
+
+        .custom-table tbody td,
+        .custom-table tbody th {
+            padding: 1.15rem;
+            border-bottom: 1px solid var(--color-border);
+            border-right: 1px solid var(--color-border);
+        }
+
+        .custom-table tbody td:last-child,
+        .custom-table tbody th:last-child {
+            /* Keep right border for commission column if requested to show ALL borders */
+            border-right: none;
+        }
+
+        /* Ensure borders are visible between all cells */
+        .custom-table td,
+        .custom-table th {
+            border: 1px solid var(--color-border) !important;
+        }
+
+        .bg-light-soft {
+            background-color: #f8fafc;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .text-primary-accent {
+            background-color: #f8fafc !important;
+            color: var(--color-primary) !important;
+            font-weight: 700;
+        }
+
+        .table-primary-subtle {
+            background-color: rgba(24, 56, 132, 0.05);
+        }
+    </style>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="index.html">
-                <!-- <i class="bi bi-wallet2 me-2 text-accent"></i>
-                AfriPayHub -->
                 <div>
                     <img src="assets/img/logo.png" alt="AfriPayHub Logo" style="height: 40px;">
                 </div>
@@ -26,9 +88,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="features.html">Fonctionnalités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Produits
+                        </a>
+                        <ul class="dropdown-menu shadow border-0">
+                            <li><a class="dropdown-item" href="solutions.html"><i class="bi bi-gear me-2"></i>
+                                    Solutions</a></li>
+                            <li><a class="dropdown-item" href="boutique.html"><i class="bi bi-shop me-2"></i>
+                                    Boutique</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="developers.html">Développeurs</a></li>
                     <li class="nav-item"><a class="nav-link active" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown me-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             🇫🇷 FR
@@ -39,8 +112,10 @@
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <a href="https://portail.afripayhub.com/login" target="_blank" class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
-                        <a href="https://portail.afripayhub.com/register" target="_blank" class="btn btn-primary btn-sm">Ouvrir un compte</a>
+                        <a href="https://portail.afripayhub.com/login" target="_blank"
+                            class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
+                        <!-- <a href="https://portail.afripayhub.com/register" target="_blank"
+                            class="btn btn-primary btn-sm">Ouvrir un compte</a> -->
                     </li>
                 </ul>
             </div>
@@ -51,82 +126,161 @@
         <div class="container text-center py-5">
             <h1 class="fw-bold display-5">Une tarification simple et transparente</h1>
             <p class="lead text-muted mx-auto" style="max-width: 600px;">
-                Payez uniquement lorsque vous encaissez. Sans frais d'installation ni frais mensuels.
+                Payez uniquement lorsque vous encaissez. Aucun frais d'installation, aucun abonnement mensuel.
             </p>
         </div>
     </header>
 
-    <section class="py-5">
+    <section class="pricing-content pt-4 pb-5">
         <div class="container">
-            <div class="row justify-content-center">
-                
-                <!-- Local Payments -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100 p-5 shadow-sm border-0 text-center">
-                        <h4 class="text-primary fw-bold mb-4">Paiements Locaux</h4>
-                        <div class="display-3 fw-bold text-accent mb-2">2.5%</div>
-                        <p class="text-muted mb-4">par transaction réussie</p>
-                        <hr>
-                        <ul class="list-unstyled text-start mt-4 mb-5">
-                            <li class="mb-3"><i class="bi bi-check2 text-accent me-2"></i> Mobile Money (Tous réseaux)</li>
-                            <li class="mb-3"><i class="bi bi-check2 text-accent me-2"></i> Cartes bancaires locales</li>
-                             <li class="mb-3"><i class="bi bi-check2 text-accent me-2"></i> Virements immédiats</li>
-                        </ul>
-                        <a href="register.html" class="btn btn-outline-primary w-100">Commencer</a>
+            <!-- Paiements Entrants -->
+            <div class="card border-0 shadow-sm mb-5" style="margin-top: -15px;">
+                <div class="card-body p-4 p-md-5">
+                    <h3 id="payment-methods" class="text-center mb-4">Paiements entrants</h3>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle custom-table">
+                            <thead class="table-light">
+                                <tr class="text-center">
+                                    <th scope="col" style="width: 25%;">Pays</th>
+                                    <th scope="col">Méthodes de paiement</th>
+                                    <th scope="col" style="width: 25%;">Commissions (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <th rowspan="2" scope="row" class="bg-light-soft">Togo</th>
+                                    <td>MOOV Money</td>
+                                    <td class="fw-bold text-primary-accent">2.4%</td>
+                                </tr>
+                                <tr>
+                                    <td>Mixx by Yas</td>
+                                    <td class="fw-bold text-primary-accent">3.4%</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="4" scope="row" class="bg-light-soft">Bénin</th>
+                                    <td>MOOV Money</td>
+                                    <td rowspan="2" class="fw-bold text-primary-accent">2.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>CELTIIS Cash</td>
+                                </tr>
+                                <tr>
+                                    <td>Coris Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>MTN Mobile Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="3" scope="row" class="bg-light-soft">Côte d'Ivoire</th>
+                                    <td>MTN Mobile Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>Orange Money</td>
+                                    <td class="fw-bold text-primary-accent">3.2%</td>
+                                </tr>
+                                <tr>
+                                    <td>Wave</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="bg-light-soft text-center">Niger</th>
+                                    <td>MTN Mobile Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2" scope="row" class="bg-light-soft">Sénégal</th>
+                                    <td>Orange Money</td>
+                                    <td class="fw-bold text-primary-accent">2.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>Wave</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="bg-light-soft text-center">Mali</th>
+                                    <td>Orange Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2" scope="row" class="bg-light-soft">Burkina-Faso</th>
+                                    <td>MOOV Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr>
+                                    <td>Orange Money</td>
+                                    <td class="fw-bold text-primary-accent">3.8%</td>
+                                </tr>
+                                <tr class="table-primary-subtle">
+                                    <th scope="row" class="bg-light-soft text-center">Partout</th>
+                                    <td class="fw-semibold">Visa/MasterCard</td>
+                                    <td class="fw-bold text-primary-accent">3.5%</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-                <!-- Featured / International -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                     <div class="card h-100 p-5 shadow price-card featured text-center position-relative">
-                        <div class="position-absolute top-0 start-50 translate-middle badge bg-secondary rounded-pill px-3 py-2 mt-2">Populaire</div>
-                        <h4 class="text-primary fw-bold mb-4 mt-2">International</h4>
-                        <div class="display-3 fw-bold text-secondary mb-2">3.5%</div>
-                        <p class="text-muted mb-4">par transaction réussie</p>
-                        <hr>
-                        <ul class="list-unstyled text-start mt-4 mb-5">
-                            <li class="mb-3"><i class="bi bi-check2 text-secondary me-2"></i> Cartes Visa & Mastercard Monde</li>
-                            <li class="mb-3"><i class="bi bi-check2 text-secondary me-2"></i> Apple Pay & Google Pay</li>
-                             <li class="mb-3"><i class="bi bi-check2 text-secondary me-2"></i> Support multi-devises</li>
-                        </ul>
-                        <a href="register.html" class="btn btn-primary w-100">Commencer</a>
-                    </div>
-                </div>
-
-                <!-- Enterprise -->
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100 p-5 shadow-sm border-0 text-center">
-                        <h4 class="text-primary fw-bold mb-4">Entreprise</h4>
-                        <div class="display-6 fw-bold text-muted mb-2 py-3">Sur mesure</div>
-                        <p class="text-muted mb-4">pour les gros volumes</p>
-                        <hr>
-                        <ul class="list-unstyled text-start mt-4 mb-5">
-                            <li class="mb-3"><i class="bi bi-check2 text-accent me-2"></i> Tarifs dégressifs</li>
-                            <li class="mb-3"><i class="bi bi-check2 text-accent me-2"></i> Gestionnaire de compte dédié</li>
-                             <li class="mb-3"><i class="bi bi-check2 text-accent me-2"></i> SLAs garantis</li>
-                        </ul>
-                        <a href="contact.html" class="btn btn-outline-primary w-100">Nous contacter</a>
-                    </div>
-                </div>
-
             </div>
-            
-            <div class="text-center mt-5">
-                <p class="text-muted fst-italic">
-                    * Des frais de virement bancaire standard peuvent s'appliquer lors du retrait de vos fonds vers votre compte bancaire.
-                </p>
-                <div class="mt-4">
-                    <img src="assets/img/logos/visa.png" height="30" class="opacity-50 mx-2" alt="">
-                    <img src="assets/img/logos/mastercard.png" height="30" class="opacity-50 mx-2" alt="">
-                    <img src="assets/img/logos/mtn.png" height="30" class="opacity-50 mx-2" alt="">
-                    <img src="assets/img/logos/orange.png" height="30" class="opacity-50 mx-2" alt="">
+
+            <!-- Paiements Sortants -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-body p-4 p-md-5">
+                    <h3 id="payout" class="text-center mb-2">Paiements sortants</h3>
+                    <p class="small text-center mb-4 text-muted">
+                        <span class="text-danger">*</span> Service disponible sur demande. Contactez notre équipe
+                        technique
+                        via le chat ou par email à <a href="mailto:support@afripayhub.com"
+                            class="text-primary fw-semibold">support@afripayhub.com</a> pour configurer vos limites de
+                        transfert et activer les déboursements.
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle custom-table">
+                            <thead class="table-light">
+                                <tr class="text-center">
+                                    <th scope="col" style="width: 35%;">Méthodes de paiement</th>
+                                    <th scope="col">Tranches (XOF)</th>
+                                    <th scope="col" style="width: 25%;">Commissions (XOF)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                <tr>
+                                    <td rowspan="5" class="bg-light-soft">
+                                        MixByYas Togo<br />
+                                        MOOV Money Bénin<br />
+                                        MTN Mobile Money Côte d'Ivoire<br />
+                                        MOOV Money Togo<br />
+                                        MTN Mobile Money Bénin<br />
+
+                                    </td>
+                                    <td>0 - 10.000</td>
+                                    <td class="fw-bold text-primary-accent">200 XOF</td>
+                                </tr>
+                                <tr>
+                                    <td>10.001 - 50.000</td>
+                                    <td class="fw-bold text-primary-accent">350 XOF</td>
+                                </tr>
+                                <tr>
+                                    <td>50.001 - 150.000</td>
+                                    <td class="fw-bold text-primary-accent">850 XOF</td>
+                                </tr>
+                                <tr>
+                                    <td>150.001 - 500.000</td>
+                                    <td class="fw-bold text-primary-accent">2100 XOF</td>
+                                </tr>
+                                <tr>
+                                    <td>500.001 et Plus</td>
+                                    <td class="fw-bold text-primary-accent">2600 XOF</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- Footer included via common template in real app, duplicated here for static HTML -->
     <!-- Footer -->
     <footer class="mt-auto">
         <div class="container">
@@ -134,7 +288,8 @@
                 <div class="col-lg-4">
                     <a class="navbar-brand text-white fw-bold fs-4 d-block mb-3" href="#">AfriPayHub</a>
                     <p class="text-white-50">
-                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à l'international.
+                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à
+                        l'international.
                     </p>
                     <div class="d-flex gap-3 social-links">
                         <a href="#"><i class="bi bi-facebook fs-5"></i></a>
@@ -147,9 +302,9 @@
                     <h5>Produit</h5>
                     <ul class="list-unstyled">
                         <li><a href="features.html">Fonctionnalités</a></li>
+                        <li><a href="solutions.html">Solutions</a></li>
+                        <li><a href="boutique.html">Boutique</a></li>
                         <li><a href="pricing.html">Tarifs</a></li>
-                        <li><a href="security.html">Sécurité</a></li>
-                        <li><a href="#">Mises à jour</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-6">
@@ -167,16 +322,19 @@
                         <li><i class="bi bi-envelope me-2"></i> support@afripayhub.com</li>
                         <li><i class="bi bi-telephone me-2"></i> (+228) 98 38 41 41 / 93 89 92 54 </li>
                         <li><i class="bi bi-geo-alt me-2"></i> Lomé-TOGO
-Qte Adewui, Bvd de la Kara</li>
+                            Qte Adewui, Bvd de la Kara</li>
                     </ul>
                 </div>
             </div>
             <div class="border-top border-secondary mt-5 pt-4 text-center text-white-50">
-                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank" class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
+                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank"
+                        class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/chat.js"></script>
 </body>
+
 </html>

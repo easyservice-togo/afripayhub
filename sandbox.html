@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,22 +16,33 @@
             border-radius: 8px;
             font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
+
         .console-header {
             background: #2d2d2d;
             padding: 10px 15px;
             display: flex;
             gap: 8px;
         }
+
         .console-dot {
             width: 12px;
             height: 12px;
             border-radius: 50%;
         }
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27c93f; }
+
+        .dot-red {
+            background: #ff5f56;
+        }
+
+        .dot-yellow {
+            background: #ffbd2e;
+        }
+
+        .dot-green {
+            background: #27c93f;
+        }
 
         .code-block {
             margin: 0;
@@ -41,6 +53,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
@@ -50,7 +63,8 @@
                     <span><img src="assets/img/logo.png" alt="AfriPayHub Logo" style="height: 40px;"></span>
                 </div>
                 afriPayHub
-                <span class="badge bg-warning text-dark mt-1" style="font-size: 0.6rem; width: fit-content;">SANDBOX</span>
+                <span class="badge bg-warning text-dark mt-1"
+                    style="font-size: 0.6rem; width: fit-content;">SANDBOX</span>
 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -59,12 +73,23 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="features.html">Fonctionnalités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Produits
+                        </a>
+                        <ul class="dropdown-menu shadow border-0">
+                            <li><a class="dropdown-item" href="solutions.html"><i class="bi bi-gear me-2"></i>
+                                    Solutions</a></li>
+                            <li><a class="dropdown-item" href="boutique.html"><i class="bi bi-shop me-2"></i>
+                                    Boutique</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link active" href="developers.html">Développeurs</a></li>
-                     <li class="nav-item"><a class="nav-link" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 
                     <!-- Lang Selector -->
-                     <li class="nav-item dropdown me-2">
+                    <li class="nav-item dropdown me-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             🇫🇷 FR
                         </a>
@@ -75,8 +100,10 @@
                     </li>
 
                     <li class="nav-item ms-lg-3">
-                        <a href="https://portail.afripayhub.com/login" target="_blank" class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
-                        <a href="https://portail.afripayhub.com/register" target="_blank" class="btn btn-primary btn-sm">Ouvrir un compte</a>
+                        <a href="https://portail.afripayhub.com/login" target="_blank"
+                            class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
+                        <!-- <a href="https://portail.afripayhub.com/register" target="_blank"
+                            class="btn btn-primary btn-sm">Ouvrir un compte</a> -->
                     </li>
                 </ul>
             </div>
@@ -88,7 +115,8 @@
             <div class="col-lg-5 mb-5">
                 <h1 class="fw-bold mb-4">Simulateur de Paiement</h1>
                 <p class="text-muted mb-5">
-                    Utilisez cet environnement de test pour simuler des transactions API sans argent réel. Configurez la requête et voyez la réponse instantanément.
+                    Utilisez cet environnement de test pour simuler des transactions API sans argent réel. Configurez la
+                    requête et visualisez la réponse instantanément.
                 </p>
 
                 <div class="card border-0 shadow-sm p-4">
@@ -96,7 +124,8 @@
                     <form id="sandboxForm">
                         <div class="mb-3">
                             <label class="form-label small fw-bold text-muted">ENDPOINT</label>
-                            <input type="text" class="form-control font-monospace bg-light" value="POST /v1/transactions/initialize" readonly>
+                            <input type="text" class="form-control font-monospace bg-light"
+                                value="POST /v1/transactions/initialize" readonly>
                         </div>
 
                         <div class="row g-3">
@@ -123,16 +152,17 @@
                             </select>
                         </div>
 
-                         <div class="mb-4">
+                        <div class="mb-4">
                             <label class="form-label small fw-bold text-muted">RÉSULTAT SOUHAITÉ</label>
-                             <div class="btn-group w-100" role="group">
-                                <input type="radio" class="btn-check" name="statusResult" id="success" autocomplete="off" checked>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="statusResult" id="success"
+                                    autocomplete="off" checked>
                                 <label class="btn btn-outline-success" for="success">Succès (200)</label>
 
                                 <input type="radio" class="btn-check" name="statusResult" id="error" autocomplete="off">
                                 <label class="btn btn-outline-danger" for="error">Échec (400)</label>
                             </div>
-                         </div>
+                        </div>
 
                         <button type="button" class="btn btn-primary w-100 py-2 fw-bold" onclick="runSimulation()">
                             <i class="bi bi-play-fill me-1"></i> Envoyer la requête
@@ -143,8 +173,9 @@
 
             <div class="col-lg-7">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h6 class="fw-bold text-muted m-0">CONSOLE LOGS</h6>
-                    <span class="badge bg-success bg-opacity-10 text-success" id="statusBadge" style="display:none">200 OK</span>
+                    <h6 class="fw-bold text-muted m-0">LOGS DE CONSOLE</h6>
+                    <span class="badge bg-success bg-opacity-10 text-success" id="statusBadge" style="display:none">200
+                        OK</span>
                 </div>
 
                 <div class="console-window">
@@ -153,7 +184,8 @@
                         <div class="console-dot dot-yellow"></div>
                         <div class="console-dot dot-green"></div>
                     </div>
-                    <pre class="code-block"><code class="language-json" id="consoleOutput">// En attente de requête...</code></pre>
+                    <pre
+                        class="code-block"><code class="language-json" id="consoleOutput">// En attente de requête...</code></pre>
                 </div>
 
                 <div class="mt-4 p-3 bg-light rounded border border-warning border-opacity-25">
@@ -162,8 +194,9 @@
                         <strong>Note importante</strong>
                     </div>
                     <p class="small text-muted mb-0">
-                        Ceci est une simulation. Aucune transaction réelle n'est effectuée et l'argent ne sera pas débité.
-                        Utilisez les clés API de test disponibles dans votre dashboard pour intégrer ceci dans votre code.
+                        Ceci est une simulation. Aucune transaction réelle n'est effectuée et aucun fonds ne sera
+                        débité. Utilisez les clés API de test disponibles dans votre tableau de bord pour intégrer ceci
+                        dans votre application.
                     </p>
                 </div>
             </div>
@@ -179,7 +212,8 @@
                         <img src="assets/img/logo_footer_blue.png" alt="Logo AfriPayHub" style="height: 80px;">
                     </a>
                     <p class="text-white-50">
-                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à l'international.
+                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à
+                        l'international.
                     </p>
                     <div class="d-flex gap-3 social-links">
                         <a href="#"><i class="bi bi-facebook fs-5"></i></a>
@@ -192,6 +226,8 @@
                     <h5>Produit</h5>
                     <ul class="list-unstyled">
                         <li><a href="features.html" class="text-white-50 text-decoration-none">Fonctionnalités</a></li>
+                        <li><a href="solutions.html" class="text-white-50 text-decoration-none">Solutions</a></li>
+                        <li><a href="boutique.html" class="text-white-50 text-decoration-none">Boutique</a></li>
                         <li><a href="pricing.html" class="text-white-50 text-decoration-none">Tarifs</a></li>
                         <li><a href="security.html" class="text-white-50 text-decoration-none">Sécurité</a></li>
                         <li><a href="#" class="text-white-50 text-decoration-none">Mises à jour</a></li>
@@ -212,12 +248,13 @@
                         <li><i class="bi bi-envelope me-2"></i> support@afripayhub.com</li>
                         <li><i class="bi bi-telephone me-2"></i> (+228) 98 38 41 41 / 93 89 92 54 </li>
                         <li><i class="bi bi-geo-alt me-2"></i> Lomé-TOGO
-Qte Adewui, Bvd de la Kara</li>
+                            Qte Adewui, Bvd de la Kara</li>
                     </ul>
                 </div>
             </div>
             <div class="border-top border-secondary mt-5 pt-4 text-center text-white-50">
-                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank" class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
+                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank"
+                        class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
             </div>
         </div>
     </footer>
@@ -275,5 +312,7 @@ Qte Adewui, Bvd de la Kara</li>
             Prism.highlightElement(consoleOutput);
         }
     </script>
+    <script src="assets/js/chat.js"></script>
 </body>
+
 </html>

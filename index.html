@@ -1,17 +1,197 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfriPayHub – La référence du paiement en ligne en Afrique</title>
-    <meta name="description" content="Solution de paiement omnicanal pour l'Afrique : Mobile Money, Cartes bancaires, API, et plus. Sécurité et fiabilité garanties.">
+    <title>AfriPayHub – La plateforme de paiement de référence en Afrique</title>
+    <meta name="description"
+        content="Solution de paiement omnicanal pour l'Afrique : Mobile Money, Cartes bancaires, API, et plus. Sécurité et fiabilité garanties.">
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Icons (Bootstrap Icons via CDN for simplicity, or inline SVGs later) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        /* Africa Map Styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('assets/img/Africa_location_map.svg.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .africa-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            max-height: 500px;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .map-container:hover .continent-path {
+            fill: #e6ecf5;
+            stroke-opacity: 0.6;
+        }
+
+        .country-dot {
+            fill: var(--color-accent);
+            cursor: pointer;
+        }
+
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% {
+                r: 3;
+                opacity: 1;
+            }
+
+            100% {
+                r: 10;
+                opacity: 0;
+            }
+        }
+
+        .transaction-flow {
+            fill: none;
+            stroke: var(--color-primary);
+            stroke-width: 1.5;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 2px var(--color-primary));
+        }
+
+        .flow-animated {
+            animation: flow-animation 3s linear infinite;
+        }
+
+        @keyframes flow-animation {
+            to {
+                stroke-dashoffset: -100;
+            }
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 8px 32px rgba(24, 56, 132, 0.1);
+            border: 1px solid rgba(24, 56, 132, 0.05);
+            transition: transform 0.3s ease;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .stat-badge:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge-1 {
+            top: 10%;
+            right: 5%;
+        }
+
+        .badge-2 {
+            bottom: 15%;
+            right: 10%;
+        }
+
+        .badge-3 {
+            bottom: 20%;
+            left: 5%;
+        }
+
+        .badge-4 {
+            top: 15%;
+            left: 0%;
+        }
+
+        @media (max-width: 768px) {
+            .stat-badge {
+                position: relative !important;
+                top: auto !important;
+                bottom: auto !important;
+                left: auto !important;
+                right: auto !important;
+                margin-bottom: 1rem;
+            }
+
+            .map-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+        }
+
+        /* CTA Card Blue Glassmorphism Design */
+        .cta-glass-card {
+            background: #0d1e44;
+            border: none;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+        }
+
+        .cta-bg-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center right;
+            opacity: 1;
+            z-index: 0;
+        }
+
+        .cta-glass-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Pure Dark Glass - Neutral & Premium */
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(0.75px);
+            -webkit-backdrop-filter: blur(0.75px);
+            z-index: 1;
+            /* No mask - Full uniform overlay */
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            padding-right: 2rem;
+            color: white;
+            /* White text for dark background */
+        }
+
+        .bg-accent-soft {
+            background-color: #d9710e !important;
+            color: #ffffff !important;
+        }
+    </style>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+
 <body>
 
     <!-- Navbar -->
@@ -31,9 +211,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="features.html">Fonctionnalités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Produits
+                        </a>
+                        <ul class="dropdown-menu shadow border-0">
+                            <li><a class="dropdown-item" href="solutions.html"><i class="bi bi-gear me-2"></i>
+                                    Solutions</a></li>
+                            <li><a class="dropdown-item" href="boutique.html"><i class="bi bi-shop me-2"></i>
+                                    Boutique</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="developers.html">Développeurs</a></li>
                     <li class="nav-item"><a class="nav-link" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown me-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             🇫🇷 FR
@@ -44,8 +235,10 @@
                         </ul>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <a href="https://portail.afripayhub.com/login" target="_blank" class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
-                        <a href="https://portail.afripayhub.com/register" target="_blank" class="btn btn-primary btn-sm">Ouvrir un compte</a>
+                        <a href="https://portail.afripayhub.com/login" target="_blank"
+                            class="btn btn-outline-secondary btn-sm me-2">Connexion</a>
+                        <!-- <a href="https://portail.afripayhub.com/register" target="_blank"
+                            class="btn btn-primary btn-sm">Ouvrir un compte</a> -->
                     </li>
                 </ul>
             </div>
@@ -60,47 +253,56 @@
                     <span class="badge bg-light text-primary border mb-3 px-3 py-2 rounded-pill">
                         <i class="bi bi-shield-check me-1"></i> Certifié PCI-DSS
                     </span>
-                    <h1 class="fw-bold display-4 mb-4">Encaissez des paiements <br><span class="text-accent">simplement, partout,</span> en toute sécurité.</h1>
+                    <h1 class="fw-bold display-4 mb-4">Encaissez vos paiements <br><span class="text-accent">simplement,
+                            partout,</span> en toute sécurité.</h1>
                     <p class="lead mb-4">
-                        La plateforme de paiement tout-en-un pour l'Afrique. Acceptez Mobile Money, Cartes Bancaires, QR Codes et plus encore via une intégration unique.
+                        La plateforme de paiement tout-en-un pour l'Afrique. Acceptez Mobile Money, Cartes Bancaires, QR
+                        Codes et plus encore via une intégration unique.
                     </p>
                     <div class="d-flex gap-3">
-                        <a href="register.html" class="btn btn-primary btn-lg px-4">Créer un compte <i class="bi bi-arrow-right ms-2"></i></a>
+                        <a href="https://portail.afripayhub.com/register" class="btn btn-primary btn-lg px-4">Ouvrir un
+                            compte <i class="bi bi-arrow-right ms-2"></i></a>
                         <a href="contact.html" class="btn btn-outline-secondary btn-lg px-4">Parler à un expert</a>
                     </div>
-                    <div class="mt-4 pt-3 border-top w-75">
-                        <small class="text-muted text-uppercase fw-bold fs-7">Compatible avec</small>
-                        <div class="d-flex gap-3 mt-2 opacity-75">
-                            <span><i class="bi bi-phone"></i> Mobile Money</span>
-                            <span><i class="bi bi-credit-card"></i> Visa/Mastercard</span>
-                            <span><i class="bi bi-qr-code"></i> QR Code</span>
+                    <div class="mt-4 pt-3 border-top d-flex align-items-center flex-wrap gap-3">
+                        <small class="text-muted text-uppercase fw-bold fs-7 mb-0">Compatible avec :</small>
+                        <div class="d-flex flex-wrap gap-3 opacity-75">
+                            <span class="text-nowrap"><i class="bi bi-phone"></i> Mobile Money</span>
+                            <span class="text-nowrap"><i class="bi bi-credit-card"></i> Visa/Mastercard</span>
+                            <span class="text-nowrap"><i class="bi bi-qr-code"></i> QR Code</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center" style="margin-top: -3rem;">
                     <div id="heroCarousel" class="carousel slide hero-img-container" data-bs-ride="carousel">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0"
+                                class="active"></button>
                             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
                             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
                         </div>
                         <div class="carousel-inner rounded-4 shadow-lg border border-white bg-white">
-                           
+
                             <div class="carousel-item">
-                                <img src="assets/img/hero_dashboard.png" class="d-block w-100" alt="Paiement Mobile" style="object-fit: cover; min-height: 450px;">
+                                <img src="assets/img/hero_dashboard.png" class="d-block w-100" alt="Paiement Mobile"
+                                    style="object-fit: cover; min-height: 450px;">
                             </div>
                             <div class="carousel-item">
-                                <img src="assets/img/header_bg_developers.png" class="d-block w-100" alt="API Développeurs" style="object-fit: cover; min-height: 450px;">
+                                <img src="assets/img/header_bg_developers.png" class="d-block w-100"
+                                    alt="API Développeurs" style="object-fit: cover; min-height: 450px;">
                             </div>
-                             <div class="carousel-item active">
-                                <img src="assets/img/features_header_bg.jpg" class="d-block w-100" alt="Dashboard AfriPayHub" style="object-fit: cover; min-height: 450px;">
+                            <div class="carousel-item active">
+                                <img src="assets/img/features_header_bg.jpg" class="d-block w-100"
+                                    alt="Dashboard AfriPayHub" style="object-fit: cover; min-height: 450px;">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel"
+                            data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel"
+                            data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -113,15 +315,60 @@
     <!-- Partners Section -->
     <section class="partners py-4">
         <div class="container">
-            <p class="text-center text-muted mb-4 small fw-bold text-uppercase">Plus de 5000 entreprises nous font confiance</p>
-            <div class="d-flex flex-wrap justify-content-center align-items-center gap-5 grayscale-logos">
-                <span class="h4 text-muted mb-0 fw-bold">MTN</span>
-                <span class="h4 text-muted mb-0 fw-bold">Orange</span>
-                <span class="h4 text-muted mb-0 fw-bold">Moov</span>
-                <span class="h4 text-muted mb-0 fw-bold">UBA</span>
-                <span class="h4 text-muted mb-0 fw-bold">Ecobank</span>
-                <span class="h4 text-muted mb-0 fw-bold">Canal+</span>
+            <p class="text-center text-muted mb-4 small fw-bold text-uppercase">Plus de 500 entreprises et particuliers
+                nous font confiance</p>
+            <div class="swiper init-swiper">
+                <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 2,
+                  "spaceBetween": 20
+                },
+                "480": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 40
+                },
+                "640": {
+                  "slidesPerView": 4,
+                  "spaceBetween": 60
+                },
+                "992": {
+                  "slidesPerView": 5,
+                  "spaceBetween": 80
+                }
+              }
+            }
+          </script>
+                <div class="swiper-wrapper align-items-center">
+                    <div class="swiper-slide"><img src="assets/img/clients/yas.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/moov.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/orabank.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
+                    <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
+
+
+        </div>
         </div>
     </section>
 
@@ -129,12 +376,13 @@
     <section class="py-6 bg-white section-features">
         <div class="container py-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bold">Tout ce dont vous avez besoin pour grandir</h2>
+                <h2 class="fw-bold">Tout ce dont vous avez besoin pour booster votre croissance</h2>
                 <p class="text-muted lead mx-auto" style="max-width: 700px;">
-                    Une suite d'outils complète conçue pour les développeurs, les commerçants et les grandes entreprises.
+                    Une suite d'outils complète conçue pour les développeurs, les commerçants et les grandes
+                    entreprises.
                 </p>
             </div>
-            
+
             <div class="row g-4">
                 <!-- Feature 1 -->
                 <div class="col-md-4">
@@ -143,30 +391,36 @@
                             <i class="bi bi-globe fs-3"></i>
                         </div>
                         <h4>Paiement en Ligne</h4>
-                        <p class="text-muted">Acceptez les paiements par carte et mobile money sur votre site web ou application en quelques clics.</p>
-                        <a href="features.html" class="fw-bold text-decoration-none">En savoir plus <i class="bi bi-arrow-right"></i></a>
+                        <p class="text-muted">Acceptez les paiements par mobile money et par carte sur votre site web ou
+                            application en quelques clics.</p>
+                        <a href="features.html" class="fw-bold text-decoration-none">En savoir plus <i
+                                class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
                 <!-- Feature 2 -->
                 <div class="col-md-4">
                     <div class="card h-100 p-4 border-0 shadow-sm bg-light-soft">
-                         <div class="feature-icon bg-white shadow-sm text-accent mb-4 rounded-3 p-3 d-inline-block">
+                        <div class="feature-icon bg-white shadow-sm text-accent mb-4 rounded-3 p-3 d-inline-block">
                             <i class="bi bi-code-slash fs-3"></i>
                         </div>
                         <h4>API Développeurs</h4>
-                        <p class="text-muted">Une API RESTful robuste et bien documentée pour intégrer les paiements dans n'importe quel système.</p>
-                        <a href="developers.html" class="fw-bold text-decoration-none text-accent">Voir la documentation <i class="bi bi-arrow-right"></i></a>
+                        <p class="text-muted">Une API RESTful robuste et bien documentée pour intégrer les paiements
+                            dans n'importe quel système.</p>
+                        <a href="developers.html" class="fw-bold text-decoration-none text-accent">Voir la documentation
+                            <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
                 <!-- Feature 3 -->
                 <div class="col-md-4">
                     <div class="card h-100 p-4 border-0 shadow-sm bg-light-soft">
-                         <div class="feature-icon bg-white shadow-sm text-secondary mb-4 rounded-3 p-3 d-inline-block">
+                        <div class="feature-icon bg-white shadow-sm text-secondary mb-4 rounded-3 p-3 d-inline-block">
                             <i class="bi bi-arrow-repeat fs-3"></i>
                         </div>
                         <h4>Abonnements</h4>
-                        <p class="text-muted">Gérez facilement les paiements récurrents et les abonnements pour votre business modèle SaaS.</p>
-                        <a href="features.html#recurring" class="fw-bold text-decoration-none text-secondary">Découvrir <i class="bi bi-arrow-right"></i></a>
+                        <p class="text-muted">Gérez facilement les paiements récurrents et les abonnements pour votre
+                            business modèle SaaS.</p>
+                        <a href="features.html#recurring" class="fw-bold text-decoration-none text-secondary">Découvrir
+                            <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -178,39 +432,53 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                     <h2 class="fw-bold mb-4">Des solutions adaptées à chaque profil</h2>
-                     <div class="d-flex flex-column gap-4">
-                         <div class="d-flex">
-                             <div class="me-3 text-primary"><i class="bi bi-shop fs-2"></i></div>
-                             <div>
-                                 <h5>Commerçants</h5>
-                                 <p class="text-muted mb-0">Encaissez sans site web via des liens de paiement sécurisés ou QR Codes.</p>
-                             </div>
-                         </div>
-                         <div class="d-flex">
-                             <div class="me-3 text-primary"><i class="bi bi-laptop fs-2"></i></div>
-                             <div>
-                                 <h5>Startups & E-commerce</h5>
-                                 <p class="text-muted mb-0">Modules prêts à l'emploi pour WooCommerce, Shopify, Prestashop.</p>
-                             </div>
-                         </div>
-                         <div class="d-flex">
-                             <div class="me-3 text-primary"><i class="bi bi-building fs-2"></i></div>
-                             <div>
-                                 <h5>Grandes Entreprises</h5>
-                                 <p class="text-muted mb-0">Gestion multi-comptes, réconciliation automatique et support dédié.</p>
-                             </div>
-                         </div>
-                     </div>
+                    <h2 class="fw-bold mb-4">Des solutions adaptées à chaque profil</h2>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="d-flex">
+                            <div class="me-3 text-primary"><i class="bi bi-shop fs-2"></i></div>
+                            <div>
+                                <h5>Commerçants</h5>
+                                <p class="text-muted mb-0">Encaissez sans site web via des liens de paiement sécurisés
+                                    ou QR Codes.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="me-3 text-primary"><i class="bi bi-laptop fs-2"></i></div>
+                            <div>
+                                <h5>Startups & E-commerce</h5>
+                                <p class="text-muted mb-0">Modules prêts à l'emploi pour WooCommerce, Shopify,
+                                    Prestashop.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="me-3 text-primary"><i class="bi bi-building fs-2"></i></div>
+                            <div>
+                                <h5>Grandes Entreprises</h5>
+                                <p class="text-muted mb-0">Gestion multi-comptes, réconciliation automatique et support
+                                    dédié.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0">
-                    <div class="bg-primary text-white p-5 rounded-4 position-relative overflow-hidden">
-                        <div class="position-relative z-1">
-                            <h3>Prêt à scaler votre business ?</h3>
-                            <p class="mb-4 text-white-50">Rejoignez des milliers d'entrepreneurs qui font confiance à AfriPayHub.</p>
-                            <a href="register.html" class="btn btn-accent btn-lg">Commencer maintenant</a>
+                    <div class="cta-glass-card p-5 rounded-4">
+                        <!-- Background Image -->
+                        <img src="assets/img/238a938810.jpg" alt="Growth Success" class="cta-bg-image">
+
+                        <!-- Smooth Blur Overlay -->
+                        <div class="cta-glass-overlay"></div>
+
+                        <!-- Content -->
+                        <div class="cta-content" data-aos="fade-right">
+                            <span class="badge bg-accent-soft mb-3 mt-n4 p-2 px-3 rounded-pill fw-bold">Succès
+                                Garanti</span>
+                            <h3 class="fw-bold mb-3 text-white">Prêt à booster votre croissance ?</h3>
+                            <p class="mb-4" style="color: #e0e0e0;">Confiez vos paiements à AfriPayHub et
+                                concentrez-vous sur
+                                votre business.</p>
+                            <a href="https://portail.afripayhub.com/register"
+                                class="btn btn-accent btn-lg px-4 shadow">Commencer maintenant</a>
                         </div>
-                        <i class="bi bi-graph-up-arrow position-absolute bottom-0 end-0 mb-n4 me-n4 text-white opacity-10" style="font-size: 15rem;"></i>
                     </div>
                 </div>
             </div>
@@ -224,77 +492,124 @@
                 <div class="col-lg-8 mx-auto">
                     <span class="text-accent fw-bold text-uppercase ls-1">À Propos de Nous</span>
                     <h2 class="display-5 fw-bold mt-2">Notre Vision & Mission</h2>
-                    <p class="lead text-muted">Construire l'infrastructure de paiement du futur pour une Afrique connectée.</p>
+                    <p class="lead text-muted">Bâtir l'infrastructure de paiement du futur pour une Afrique
+                        connectée.</p>
                 </div>
             </div>
 
             <div class="row g-4 mb-5">
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="card h-100 p-4 border-0 shadow-sm text-center card-hover-effect">
-                        <div class="mx-auto mb-4 p-3 rounded-circle bg-white shadow-sm text-primary" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                        <div class="mx-auto mb-4 p-3 rounded-circle bg-white shadow-sm text-primary"
+                            style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
                             <i class="bi bi-eye fs-2"></i>
                         </div>
                         <h3>Notre Vision</h3>
-                        <p class="text-muted">Devenir le partenaire de croissance incontournable pour chaque entreprise africaine, en simplifiant l'accès à l'économie numérique mondiale.</p>
+                        <p class="text-muted">Devenir le partenaire technologique incontournable pour chaque entreprise
+                            africaine, en simplifiant l'accès à l'économie numérique mondiale.</p>
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="card h-100 p-4 border-0 shadow-sm text-center card-hover-effect">
-                         <div class="mx-auto mb-4 p-3 rounded-circle bg-white shadow-sm text-accent" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                        <div class="mx-auto mb-4 p-3 rounded-circle bg-white shadow-sm text-accent"
+                            style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
                             <i class="bi bi-rocket-takeoff fs-2"></i>
                         </div>
                         <h3>Notre Mission</h3>
-                        <p class="text-muted">Fournir des outils financiers fiables, sécurisés et innovants qui permettent aux marchands de se faire payer partout, tout le temps.</p>
+                        <p class="text-muted">Fournir des outils financiers fiables, sécurisés et innovants qui
+                            permettent aux marchands de se faire payer partout et à tout moment.</p>
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="card h-100 p-4 border-0 shadow-sm text-center card-hover-effect">
-                         <div class="mx-auto mb-4 p-3 rounded-circle bg-white shadow-sm text-success" style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
+                        <div class="mx-auto mb-4 p-3 rounded-circle bg-white shadow-sm text-success"
+                            style="width: 80px; height: 80px; display:flex; align-items:center; justify-content:center;">
                             <i class="bi bi-gem fs-2"></i>
                         </div>
                         <h3>Nos Valeurs</h3>
-                        <p class="text-muted">Transparence, Sécurité et Innovation sont au cœur de tout ce que nous construisons. Nous croyons en un succès partagé.</p>
+                        <p class="text-muted">Transparence, Sécurité et Innovation sont au cœur de tout ce que nous
+                            construisons. Nous croyons en la réussite partagée.</p>
                     </div>
                 </div>
             </div>
 
-             <!-- Regional stats or presence -->
+            <!-- Regional stats or presence -->
             <div class="row align-items-center mt-5" data-aos="fade-up">
                 <div class="col-lg-6">
                     <h3 class="fw-bold mb-4">Présence Régionale</h3>
                     <p class="text-muted mb-4">
-                        AfriPayHub est présent dans plus de <strong>15 pays</strong> et connecte des millions d'utilisateurs. Nous sommes fiers d'être ancrés localement tout en offrant des standards internationaux.
+                        AfriPayHub est présent dans plus de <strong>15 pays</strong> et connecte des millions
+                        d'utilisateurs. Nous sommes fiers d'être ancrés localement tout en offrant des standards
+                        internationaux.
                     </p>
                     <ul class="list-unstyled d-flex flex-wrap gap-3">
-                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i> Lomé-TOGO</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i> Sénégal</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i> Cameroun</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i> Bénin</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i> Burkina Faso</li>
-                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i> Mali</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i>
+                            TOGO</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i>
+                            Sénégal</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i>
+                            Cameroun</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i>
+                            Bénin</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i>
+                            Burkina Faso</li>
+                        <li class="d-flex align-items-center"><i class="bi bi-check-circle-fill text-accent me-2"></i>
+                            Mali</li>
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <div class="p-5 bg-white rounded-4 shadow-lg text-center position-relative overflow-hidden">
-                        <i class="bi bi-globe-americas text-primary opacity-10 position-absolute top-50 start-50 translate-middle" style="font-size: 15rem;"></i>
-                        <div class="row position-relative z-1">
-                            <div class="col-6 mb-4">
-                                <h2 class="fw-bold text-primary display-4">15+</h2>
-                                <p class="text-muted small">Pays Couverts</p>
-                            </div>
-                             <div class="col-6 mb-4">
-                                <h2 class="fw-bold text-primary display-4">5M+</h2>
-                                <p class="text-muted small">Transactions / Jour</p>
-                            </div>
-                             <div class="col-6">
-                                <h2 class="fw-bold text-accent display-4">50k</h2>
-                                <p class="text-muted small">Marchands Actifs</p>
-                            </div>
-                             <div class="col-6">
-                                <h2 class="fw-bold text-accent display-4">99.9%</h2>
-                                <p class="text-muted small">Uptime Garanti</p>
-                            </div>
+                    <div class="map-container" data-aos="zoom-in">
+                        <!-- Stat Badges -->
+                        <div class="stat-badge badge-1" data-aos="fade-left" data-aos-delay="100">
+                            <h4 class="fw-bold text-primary mb-0">15+</h4>
+                            <p class="text-muted small mb-0">Pays Couverts</p>
                         </div>
+                        <div class="stat-badge badge-2" data-aos="fade-left" data-aos-delay="200">
+                            <h4 class="fw-bold text-primary mb-0">5M+</h4>
+                            <p class="text-muted small mb-0">Transactions / Jour</p>
+                        </div>
+                        <div class="stat-badge badge-3" data-aos="fade-right" data-aos-delay="300">
+                            <h4 class="fw-bold text-accent mb-0">50k</h4>
+                            <p class="text-muted small mb-0">Marchands Actifs</p>
+                        </div>
+                        <div class="stat-badge badge-4" data-aos="fade-right" data-aos-delay="400">
+                            <h4 class="fw-bold text-accent mb-0">60%</h4>
+                            <p class="text-muted small mb-0">Uptime Garanti</p>
+                        </div>
+
+                        <!-- SVG Overlay for Animations -->
+                        <svg viewBox="0 0 100 100" class="africa-svg">
+                            <!-- Country Dots (Repositioned to match the new image silhouette) -->
+                            <g class="dots">
+                                <!-- Senegal -->
+                                <circle cx="18" cy="38" r="2" class="country-dot" />
+                                <circle cx="18" cy="38" r="2" class="country-dot pulse" />
+
+                                <!-- Mali -->
+                                <circle cx="28" cy="32" r="2" class="country-dot" />
+                                <circle cx="28" cy="32" r="2" class="country-dot pulse"
+                                    style="animation-delay: 0.5s;" />
+
+                                <!-- Burkina -->
+                                <circle cx="35" cy="42" r="2" class="country-dot" />
+                                <circle cx="35" cy="42" r="2" class="country-dot pulse" style="animation-delay: 1s;" />
+
+                                <!-- Togo -->
+                                <circle cx="44" cy="56" r="2" class="country-dot" />
+                                <circle cx="44" cy="56" r="2" class="country-dot pulse"
+                                    style="animation-delay: 0.2s;" />
+
+                                <!-- Benin -->
+                                <circle cx="48" cy="56" r="2" class="country-dot" />
+                                <circle cx="48" cy="56" r="2" class="country-dot pulse"
+                                    style="animation-delay: 0.7s;" />
+
+                                <!-- Cameroon -->
+                                <circle cx="64" cy="65" r="2" class="country-dot" />
+                                <circle cx="64" cy="65" r="2" class="country-dot pulse"
+                                    style="animation-delay: 1.2s;" />
+                            </g>
+                        </svg>
                     </div>
                 </div>
             </div>
@@ -308,7 +623,8 @@
                 <div class="col-lg-4">
                     <a class="navbar-brand text-white fw-bold fs-4 d-block mb-3" href="#">AfriPayHub</a>
                     <p class="text-white-50">
-                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à l'international.
+                        La plateforme de paiement sécurisée pour propulser votre business en Afrique et à
+                        l'international.
                     </p>
                     <div class="d-flex gap-3 social-links">
                         <a href="#"><i class="bi bi-facebook fs-5"></i></a>
@@ -321,9 +637,9 @@
                     <h5>Produit</h5>
                     <ul class="list-unstyled">
                         <li><a href="features.html">Fonctionnalités</a></li>
+                        <li><a href="solutions.html">Solutions</a></li>
+                        <li><a href="boutique.html">Boutique</a></li>
                         <li><a href="pricing.html">Tarifs</a></li>
-                        <li><a href="security.html">Sécurité</a></li>
-                        <li><a href="#">Mises à jour</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-6">
@@ -341,12 +657,13 @@
                         <li><i class="bi bi-envelope me-2"></i> support@afripayhub.com</li>
                         <li><i class="bi bi-telephone me-2"></i> (+228) 98 38 41 41 / 93 89 92 54 </li>
                         <li><i class="bi bi-geo-alt me-2"></i> Lomé-TOGO
-Qte Adewui, Bvd de la Kara</li>
+                            Qte Adewui, Bvd de la Kara</li>
                     </ul>
                 </div>
             </div>
             <div class="border-top border-secondary mt-5 pt-4 text-center text-white-50">
-                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank" class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
+                <p>&copy; 2025 AfriPayHub Tous droits réservés. <a href="https://easyservices.tg" target="_blank"
+                        class="text-white-50 ms-2">Mentions légales. EASY SERVICES</a></p>
             </div>
         </div>
     </footer>
@@ -354,14 +671,19 @@ Qte Adewui, Bvd de la Kara</li>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS JS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 800,
-        once: true
-      });
+        AOS.init({
+            duration: 800,
+            once: true
+        });
     </script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Main JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/chat.js"></script>
 </body>
+
 </html>
-                

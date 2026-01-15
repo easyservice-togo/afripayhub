@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,81 @@
     <!-- PrismJS for syntax highlighting -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .doc-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+            padding-top: 1rem;
+            /* Adjusted for balance */
+        }
+
+        .doc-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #sidebarMenu .nav-link {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #sidebarMenu .nav-link:hover {
+            color: var(--color-accent) !important;
+            padding-left: 1.25rem;
+        }
+
+        #sidebarMenu .nav-link.active {
+            color: var(--color-accent) !important;
+            background: rgba(217, 113, 14, 0.05);
+            background: rgba(217, 113, 14, 0.05);
+            border-radius: 8px;
+        }
+
+        .btn-orange-solid {
+            background-color: #d9710e;
+            border: 2px solid #d9710e;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-orange-solid:hover {
+            background-color: #b95f0c;
+            /* Slightly darker orange */
+            border-color: #b95f0c;
+            color: white;
+            transform: translateY(-2px);
+            /* Subtle lift */
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+    </style>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
@@ -26,9 +101,20 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="features.html">Fonctionnalités</a></li>
-                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Produits
+                        </a>
+                        <ul class="dropdown-menu shadow border-0">
+                            <li><a class="dropdown-item" href="solutions.html"><i class="bi bi-gear me-2"></i>
+                                    Solutions</a></li>
+                            <li><a class="dropdown-item" href="boutique.html"><i class="bi bi-shop me-2"></i>
+                                    Boutique</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link active" href="developers.html">API & Docs</a></li>
                     <li class="nav-item"><a class="nav-link" href="pricing.html">Tarifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item dropdown me-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                             🇫🇷 FR
@@ -40,101 +126,232 @@
                     </li>
                     <li class="nav-item ms-lg-3">
                         <a href="sandbox.html" class="btn btn-outline-secondary btn-sm me-2">Sandbox</a>
-                        <a href="register.html" class="btn btn-primary btn-sm">Obtenir Clé API</a>
+                        <!-- <a href="register.html" class="btn btn-primary btn-sm">Obtenir Clé API</a> -->
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid mt-5 pt-3">
+    <!-- Adjusted spacing: mt-5 is not enough for fixed navbar on all screens, using custom style for safety -->
+    <div class="container-fluid pt-1 pt-lg-4" style="margin-top: 5rem;">
         <div class="row">
-            <!-- Sidebar -->
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse position-fixed h-100 overflow-auto pt-5" style="z-index: 100;">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
+            <!-- Sidebar (Offcanvas on mobile, Fixed Sidebar on desktop) -->
+            <nav id="sidebarMenu"
+                class="offcanvas-md offcanvas-start col-md-3 col-lg-2 bg-light sidebar position-fixed-md h-100 overflow-auto pt-md-5"
+                tabindex="-1" aria-labelledby="sidebarMenuLabel" style="z-index: 1045;">
+
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title fw-bold" id="sidebarMenuLabel">Documentation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="offcanvas-body position-sticky pt-3">
+                    <ul class="nav flex-column" id="docNav">
                         <li class="nav-item">
-                            <a class="nav-link active fw-bold" href="#">
+                            <a class="nav-link active fw-bold" data-section="sec-intro">
                                 <i class="bi bi-house-door me-2"></i> Introduction
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-muted" href="#">
+                            <a class="nav-link text-muted" data-section="sec-auth">
                                 <i class="bi bi-key me-2"></i> Authentification
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-muted" href="#">
+                            <a class="nav-link text-muted" data-section="sec-init">
                                 <i class="bi bi-credit-card me-2"></i> Initialiser un paiement
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-muted" href="#">
+                            <a class="nav-link text-muted" data-section="sec-webhooks">
                                 <i class="bi bi-arrow-repeat me-2"></i> Webhooks
                             </a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-muted" href="#">
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" data-section="sec-errors">
                                 <i class="bi bi-bug me-2"></i> Codes d'erreur
                             </a>
                         </li>
-                         <li class="nav-item mt-3">
+                        <li class="nav-item">
+                            <a class="nav-link text-muted" data-section="sec-sdks">
+                                <i class="bi bi-box me-2"></i> SDKs & Librairies
+                            </a>
+                        </li>
+                        <li class="nav-item mt-3">
                             <a class="nav-link text-warning fw-bold" href="sandbox.html">
                                 <i class="bi bi-joystick me-2"></i> Sandbox
                             </a>
                         </li>
                     </ul>
-                    
-                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                        <span>SDKs</span>
-                    </h6>
-                    <ul class="nav flex-column mb-2">
-                        <li class="nav-item"><a class="nav-link text-muted" href="#">PHP / Laravel</a></li>
-                        <li class="nav-item"><a class="nav-link text-muted" href="#">Node.js</a></li>
-                        <li class="nav-item"><a class="nav-link text-muted" href="#">Python</a></li>
                     </ul>
                 </div>
             </nav>
 
             <!-- Main Content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-5">
-                <div class="header-bg header-developers rounded-4 p-5 mb-5 text-center">
-                     <h1 class="display-5 fw-bold text-white">Introduction à l'API AfriPayHub</h1>
-                     <p class="lead text-white-50">Exploitez la puissance de notre infrastructure de paiement.</p>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-3" id="main-doc-content">
+
+                <!-- Persistent Header (Visible on Mobile ONLY) -->
+                <div
+                    class="header-developers rounded-4 mb-3 overflow-hidden position-relative shadow-lg d-md-none animate-slide-left">
+                    <!-- Background Image -->
+                    <img src="assets/img/hero_dashboard.png" alt="Developer Background"
+                        class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover; z-index: 0;">
+
+                    <!-- Blue Tech Overlay -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background: linear-gradient(135deg, rgba(90, 122, 196, 0.8) 0%, rgba(24, 56, 132, 0.8) 100%); backdrop-filter: blur(2px); z-index: 1;">
+                    </div>
+
+                    <!-- Content (Compact for Mobile) -->
+                    <div class="position-relative z-2 py-3 px-3">
+                        <div class="row align-items-center">
+                            <div class="col-8 text-start">
+                                <span class="badge mb-1 px-2 py-1 rounded-pill fw-bold"
+                                    style="background-color: #d9710e; color: #f0f0f0; font-size: 0.65rem;">Documentation
+                                    API</span>
+                                <h1 class="h5 fw-bold text-white mb-1">Espace Développeurs</h1>
+                                <p class="mb-2 text-white-50" style="font-size: 0.95rem; line-height: 1.2;">
+                                    Intégrez nos solutions rapidement.
+                                </p>
+                                <div class="d-flex gap-2">
+                                    <a href="#authentication"
+                                        class="btn btn-light rounded-pill px-2 py-0 fw-bold text-primary"
+                                        style="font-size: 0.75rem;">Commencer</a>
+                                    <a href="#references" class="btn rounded-pill px-2 py-0 btn-orange-solid"
+                                        style="font-size: 0.75rem;">Références</a>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <div class="d-inline-block p-2 rounded-circle"
+                                    style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.2);">
+                                    <img src="assets/img/logo.png" alt="Logo" class="img-fluid"
+                                        style="height: 40px; filter: brightness(0) invert(1);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h2 class="h2 fw-bold">Vue d'ensemble</h2>
+                <!-- Mobile Sidebar Toggle (Restored & Left Aligned) -->
+                <div class="d-md-none mb-3 text-start">
+                    <button class="btn btn-outline-primary fw-bold d-flex align-items-center gap-2" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                        aria-label="Toggle navigation">
+                        <i class="bi bi-list"></i> Menu Documentation
+                    </button>
                 </div>
 
-                <p class="lead">
-                    AfriPayHub fournit une API RESTful puissante et facile à utiliser pour accepter des paiements sur vos sites web et applications mobiles.
-                </p>
+                <!-- Section: Introduction -->
+                <section id="sec-intro" class="doc-section active pt-0">
+                    <!-- Desktop-Only Header (Restored to keep Web intact) -->
+                    <div
+                        class="header-developers rounded-4 mb-5 overflow-hidden position-relative shadow-lg d-none d-md-block">
+                        <!-- Background Image -->
+                        <img src="assets/img/hero_dashboard.png" alt="Developer Background"
+                            class="position-absolute top-0 start-0 w-100 h-100" style="object-fit: cover; z-index: 0;">
 
-                <div class="alert alert-info border-2" role="alert">
-                    <i class="bi bi-info-circle-fill me-2"></i>
-                    <strong>Base URL:</strong> <code>https://api.AfriPayHub.com/v1</code>
-                </div>
+                        <!-- Blue Tech Overlay -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100"
+                            style="background: linear-gradient(135deg, rgba(90, 122, 196, 0.8) 0%, rgba(24, 56, 132, 0.8) 100%); backdrop-filter: blur(2px); z-index: 1;">
+                        </div>
 
-                <h3 class="mt-5 fw-bold">Initialiser un paiement</h3>
-                <p>Pour démarrer une transaction, envoyez une requête POST à l'endpoint <code>/transactions/initialize</code>.</p>
+                        <!-- Content -->
+                        <div class="position-relative z-2 py-3 px-4">
+                            <div class="row">
+                                <div class="col-lg-7 text-center text-lg-start">
+                                    <span class="badge mb-2 px-2 py-1 rounded-pill fw-bold small"
+                                        style="background-color: #d9710e; color: #f0f0f0;">Documentation API</span>
+                                    <h1 class="h2 fw-bold text-white mb-2">Introduction à l'API AfriPayHub</h1>
+                                    <p class="mb-3 text-white-50 small">
+                                        Exploitez la puissance de notre infrastructure de paiement sécurisée pour bâtir
+                                        des solutions robustes et évolutives.
+                                    </p>
+                                    <div class="d-flex gap-2 flex-wrap justify-content-center justify-content-lg-start">
+                                        <a href="#authentication"
+                                            class="btn btn-light rounded-pill px-3 fw-bold text-primary">Commencer</a>
+                                        <a href="#references"
+                                            class="btn rounded-pill px-3 btn-orange-solid">Références</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 text-center mt-4 mt-lg-0">
+                                    <div class="d-inline-block p-4 rounded-circle"
+                                        style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                                        <img src="assets/img/logo.png" alt="AfriPayHub Logo" class="img-fluid"
+                                            style="height: 80px; filter: brightness(0) invert(1);">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <ul class="nav nav-tabs mt-4" id="codeTabs" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="curl-tab" data-bs-toggle="tab" data-bs-target="#curl" type="button" role="tab">cURL</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="php-tab" data-bs-toggle="tab" data-bs-target="#php" type="button" role="tab">PHP</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="node-tab" data-bs-toggle="tab" data-bs-target="#node" type="button" role="tab">Node.js</button>
-                    </li>
-                </ul>
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h2 class="h2 fw-bold">Vue d'ensemble</h2>
+                    </div>
 
-                <div class="tab-content border border-top-0 rounded-bottom p-0" id="codeTabsContent">
-                    <!-- cURL -->
-                    <div class="tab-pane fade show active" id="curl" role="tabpanel">
-<pre class="rounded-0 m-0"><code class="language-bash">curl https://api.AfriPayHub.com/v1/transactions/initialize \
+                    <p class="lead">
+                        AfriPayHub fournit une API RESTful puissante et facile à intégrer pour accepter des paiements
+                        sur vos sites web et applications mobiles.
+                    </p>
+
+                    <div class="alert alert-info border-2" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <strong>Base URL:</strong> <code>https://api.AfriPayHub.com/v1</code>
+                    </div>
+
+                    <p>Notre documentation est conçue pour vous aider à démarrer rapidement. Que vous soyez une startup
+                        ou une grande entreprise, nos outils s'adaptent à vos besoins.</p>
+
+                    <div class="card bg-light border-0 p-4 mt-4">
+                        <h5 class="fw-bold"><i class="bi bi-lightning-charge-fill text-accent me-2"></i>Prêt à coder ?
+                        </h5>
+                        <p class="mb-0">Utilisez nos <strong>SDKs officiels</strong> pour PHP, Node.js et Python pour
+                            gagner du temps. <a href="#" data-section="sec-sdks" class="fw-bold section-link">Voir les
+                                SDKs <i class="bi bi-arrow-right"></i></a></p>
+                    </div>
+                </section>
+
+                <!-- Section: Authentification -->
+                <section id="sec-auth" class="doc-section">
+                    <h2 class="fw-bold mb-4">Authentification</h2>
+                    <p>Toutes les requêtes API doivent être authentifiées à l'aide de votre <strong>Clé Secrète</strong>
+                        dans le header de la requête.</p>
+
+                    <div class="alert alert-warning border-2">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Gardez votre clé secrète en sécurité. Ne l'utilisez jamais côté client (boutique.js).
+                    </div>
+
+                    <h4 class="mt-4">Header Authorization</h4>
+                    <pre><code class="language-http">Authorization: Bearer YOUR_SECRET_KEY</code></pre>
+
+                    <p class="mt-4">Vous pouvez obtenir vos clés API dans votre <a href="register.html">Tableau de
+                            bord</a> AfriPayHub sous la section Paramètres API.</p>
+                </section>
+
+                <!-- Section: Initialisation -->
+                <section id="sec-init" class="doc-section">
+                    <h2 class="fw-bold mb-4">Initialiser un paiement</h2>
+                    <p>Pour démarrer une transaction, envoyez une requête POST à l'endpoint
+                        <code>/transactions/initialize</code>.
+                    </p>
+
+                    <ul class="nav nav-tabs mt-4" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="curl-tab-init" data-bs-toggle="tab"
+                                data-bs-target="#curl-init" type="button" role="tab">cURL</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="php-tab-init" data-bs-toggle="tab" data-bs-target="#php-init"
+                                type="button" role="tab">PHP</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content border border-top-0 rounded-bottom p-0 mb-4">
+                        <div class="tab-pane fade show active" id="curl-init" role="tabpanel">
+                            <pre class="rounded-0 m-0"><code class="language-bash">curl https://api.AfriPayHub.com/v1/transactions/initialize \
   -H "Authorization: Bearer YOUR_SECRET_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -143,42 +360,116 @@
     "email": "customer@email.com",
     "payment_method": "mobile_money"
   }'</code></pre>
-                    </div>
-
-                    <!-- PHP -->
-                    <div class="tab-pane fade" id="php" role="tabpanel">
-<pre class="rounded-0 m-0"><code class="language-php">&lt;?php
+                        </div>
+                        <div class="tab-pane fade" id="php-init" role="tabpanel">
+                            <pre class="rounded-0 m-0"><code class="language-php">&lt;?php
 $url = "https://api.AfriPayHub.com/v1/transactions/initialize";
-$fields = [
-  'amount' => 5000,
-  'currency' => 'XOF',
-  'email' => 'customer@email.com'
-];
-// ... utilisez cURL ou Guzzle pour envoyer la requête
+// ... code PHP
 ?&gt;</code></pre>
+                        </div>
                     </div>
-                     <!-- Node -->
-                    <div class="tab-pane fade" id="node" role="tabpanel">
-<pre class="rounded-0 m-0"><code class="language-javascript">const axios = require('axios');
 
-axios.post('https://api.AfriPayHub.com/v1/transactions/initialize', {
-    amount: 5000,
-    currency: 'XOF',
-    email: 'customer@email.com'
-  }, {
-    headers: { 'Authorization': 'Bearer YOUR_SECRET_KEY' }
-  })
-  .then(response => console.log(response.data))
-  .catch(error => console.error(error));</code></pre>
+                    <h4 class="mt-4">Réponse attendue</h4>
+                    <pre><code class="language-json">{
+  "status": true,
+  "message": "Transaction initialized",
+  "data": {
+    "authorization_url": "https://checkout.AfriPayHub.com/pay/...",
+    "reference": "AFR-782hs92"
+  }
+}</code></pre>
+                </section>
+
+                <!-- Section: Webhooks -->
+                <section id="sec-webhooks" class="doc-section">
+                    <h2 class="fw-bold mb-4">Webhooks</h2>
+                    <p>Les webhooks vous permettent de recevoir des notifications en temps réel lorsque des événements
+                        se produisent sur votre compte (paiement réussi, échec, etc.).</p>
+
+                    <h4 class="mt-4">Configuration</h4>
+                    <p>Définissez votre URL de webhook dans votre tableau de bord. Nous enverrons une requête POST JSON
+                        à cette URL.</p>
+
+                    <pre><code class="language-javascript">{
+  "event": "charge.success",
+  "data": {
+    "id": 12345,
+    "domain": "test",
+    "status": "success",
+    "reference": "AFR-782hs92",
+    "amount": 5000,
+    "customer": {
+      "email": "customer@email.com"
+    }
+  }
+}</code></pre>
+                </section>
+
+                <!-- Section: Codes d'erreur -->
+                <section id="sec-errors" class="doc-section">
+                    <h2 class="fw-bold mb-4">Codes d'erreur</h2>
+                    <table class="table table-bordered">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Code</th>
+                                <th>Signification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>401</code></td>
+                                <td>Clé API invalide ou manquante.</td>
+                            </tr>
+                            <tr>
+                                <td><code>400</code></td>
+                                <td>Paramètres requis manquants ou invalides.</td>
+                            </tr>
+                            <tr>
+                                <td><code>402</code></td>
+                                <td>Transaction refusée par l'opérateur.</td>
+                            </tr>
+                            <tr>
+                                <td><code>500</code></td>
+                                <td>Erreur interne du serveur.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Section: SDKs -->
+                <section id="sec-sdks" class="doc-section">
+                    <h2 class="fw-bold mb-4">SDKs & Librairies</h2>
+                    <p>Accélérez votre intégration en utilisant nos bibliothèques clientes officielles maintenues par
+                        notre équipe.</p>
+
+                    <div class="row g-4 mt-2">
+                        <div class="col-md-4">
+                            <div class="card h-100 p-4 border-0 shadow-sm transition-hover">
+                                <div class="fs-1 text-primary mb-3"><i class="bi bi-filetype-php"></i></div>
+                                <h5 class="fw-bold">PHP / Laravel</h5>
+                                <p class="text-muted small">Intégration fluide pour les projets PHP et Framework
+                                    Laravel.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm mt-auto">Documentation SDK</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 p-4 border-0 shadow-sm transition-hover">
+                                <div class="fs-1 text-primary mb-3"><i class="bi bi-filetype-js"></i></div>
+                                <h5 class="fw-bold">Node.js</h5>
+                                <p class="text-muted small">Module npm complet pour vos serveurs JavaScript.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm mt-auto">Documentation SDK</a>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 p-4 border-0 shadow-sm transition-hover">
+                                <div class="fs-1 text-primary mb-3"><i class="bi bi-filetype-py"></i></div>
+                                <h5 class="fw-bold">Python</h5>
+                                <p class="text-muted small">Bibliothèque PyPI pour Python 3.8+.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm mt-auto">Documentation SDK</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <h3 class="mt-5 fw-bold">Testez gratuitement</h3>
-                <p>Créez un compte Sandbox pour simuler des paiements mobile money et cartes sans débiter d'argent réel.</p>
-                <a href="sandbox.html" class="btn btn-primary">Ouvrir la Console Sandbox</a>
-
-              
-
+                </section>
             </main>
         </div>
     </div>
@@ -186,9 +477,81 @@ axios.post('https://api.AfriPayHub.com/v1/transactions/initialize', {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-clike.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markup-templating.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markup-templating.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-bash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-php.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script src="assets/js/chat.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('#sidebarMenu .nav-link[data-section], .section-link[data-section]');
+            const sections = document.querySelectorAll('.doc-section');
+
+            function switchSection(sectionId, updateNav = true) {
+                // Affichage de la section
+                sections.forEach(sec => {
+                    sec.classList.remove('active');
+                });
+                const targetSection = document.getElementById(sectionId);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+
+                    // Mise à jour de la sidebar si nécessaire
+                    if (updateNav) {
+                        const activeLink = document.querySelector(`#sidebarMenu .nav-link[data-section="${sectionId}"]`);
+                        if (activeLink) {
+                            const sidebarLinks = document.querySelectorAll('#sidebarMenu .nav-link[data-section]');
+                            sidebarLinks.forEach(l => {
+                                l.classList.remove('active', 'fw-bold');
+                                l.classList.add('text-muted');
+                            });
+                            activeLink.classList.add('active', 'fw-bold');
+                            activeLink.classList.remove('text-muted');
+                        }
+                    }
+
+                    // Scroll to top of content
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+
+                    // Close mobile menu if open
+                    // Close mobile top menu if open
+                    const navbarCollapse = document.getElementById('navbarNav');
+                    if (navbarCollapse.classList.contains('show')) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse);
+                        bsCollapse.hide();
+                    }
+
+                    // Close mobile sidebar if open (Offcanvas)
+                    const sidebarMenu = document.getElementById('sidebarMenu');
+                    if (sidebarMenu && sidebarMenu.classList.contains('show')) {
+                        const bsOffcanvas = bootstrap.Offcanvas.getInstance(sidebarMenu) || new bootstrap.Offcanvas(sidebarMenu);
+                        bsOffcanvas.hide();
+                    }
+                }
+            }
+
+            // Mobile Nav Click Handlers (Sidebar Links)
+            const sidebarLinks = document.querySelectorAll('#sidebarMenu .nav-link[data-section]');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    switchSection(sectionId);
+                });
+            });
+
+            // Inline Section Links
+            const inlineLinks = document.querySelectorAll('.section-link[data-section]');
+            inlineLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    switchSection(sectionId);
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
